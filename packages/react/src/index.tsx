@@ -1,7 +1,14 @@
 import { colors } from '@ignite-ui/tokens'
 
+import { styled } from './styles'
+
+const H1Styled = styled("h1", {
+    fontFamily: "$default",
+    color: "$gray400"
+})
+
 export function App() {
     return (
-        <h1 style={{ color: colors.gray400 }} >Hello World</h1>
+        <H1Styled style={{ color: colors.gray400 }} >Hello World</H1Styled>
     )
 }
