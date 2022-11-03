@@ -126,6 +126,15 @@ var require_dist = __commonJS({
   }
 });
 
-// src/index.ts
+// src/index.tsx
 var import_tokens = __toESM(require_dist());
-console.log(import_tokens.colors);
+import { jsx } from "react/jsx-runtime";
+function App() {
+  return /* @__PURE__ */ jsx("h1", {
+    style: { color: import_tokens.colors.gray400 },
+    children: "Hello World"
+  });
+}
+export {
+  App
+};
