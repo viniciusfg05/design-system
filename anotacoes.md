@@ -14,7 +14,7 @@
   - [ ] MultiStep:
 
 ## Criando pacote de tokens
-    Criando um 'package.json' em "\design-system\packages\tokens>"
+    Criando um 'package.json' em "\design-system\packages\tokens"
     Name: package.json: Vamos detalar um nome da 'organizations' - "name": "@ignite-ui/tokens",
 
 ## Build do pacote com TSUP
@@ -24,3 +24,98 @@
             * esm,cjs - ecmascript module.js e JS
             * --dts - Definiççaos de tipagem | Auxiliam outro pacotes que importarem a ter a iteligencia do TS
             * --watch - Fica monitorando qualquer alteração e salva
+
+## Configurando Monorepo
+  Criando um 'package.json' em "\design-system\packages\react"
+    - Vamos add a dependetencia dos tokens:
+
+      ~~~ts
+        {
+          "name": "@ignite-ui/react",
+          "version": "1.0.0",
+          "description": "",
+          "main": "./dist/index.js", // Pasta raiz
+          "module": "./dist/index.mjs", // Pasta raiz para mjs
+          "types": "./dist/index.d.js", // Pasta raiz das definições do TS
+          "scripts": {
+            "build": "tsup src/index.ts --format esm,cjs --dts",
+            "dev": "tsup src/index.ts --format esm,cjs --dts --watch"
+          },
+          "keywords": [],
+          "author": "",
+          "license": "ISC",
+          "devDependencies": {
+            "tsup": "^6.3.0",
+            "@ignite-ui/react": "*" // Dependencias
+          }
+        }
+      ~~~
+
+      - Vamos add a dependetencia dos tokes: "\design-system\packages\tokens"
+
+      ~~~ts
+        {
+          "name": "@ignite-ui/tokens",
+          "version": "1.0.0",
+          "description": "",
+          "main": "./dist/index.js", // Pasta raiz
+          "module": "./dist/index.mjs", // Pasta raiz para mjs
+          "types": "./dist/index.d.js", // Pasta raiz das definições do TS
+          "scripts": {
+            "build": "tsup src/index.ts --format esm,cjs --dts",
+            "dev": "tsup src/index.ts --format esm,cjs --dts --watch"
+          },
+          "keywords": [],
+          "author": "",
+          "license": "ISC",
+          "devDependencies": {
+            "tsup": "^6.3.0",
+            "@ignite-ui/react": "*" // Dependencias
+          }
+        }
+      ~~~
+
+
+  Criando um 'package.json' em "\design-system" 
+  ~~~ts
+    {
+      "private": true,
+      "workspaces": [
+        "packages/*"
+      ]
+    }
+  ~~~
+
+  - Erro: src/index.ts(1,24): error TS2792: Cannot find module '@ignite-ui/tokens'. Did you mean to set the 'moduleResolution' option to 'node', or to add aliases to the 'paths' option?
+    - Pq não temos as configuration do Types conpartilhavel entre pacotes
+
+## Configuração do TypeScript
+    - Vamos criar algumas configuration do TypeScript, consultar na pasta
+      - base.json e react.json
+
+    - Depois vamos importar ts-config para os pacotes tokens e react
+     - "@ignite-ui/ts-config": "*",
+
+    - Vamos criar tsconfig.json em tokens e react
+      tokens :
+
+        ~~~js
+          {
+            "extends": "@ignite-ui/ts-config/base.json",
+            "include": ["src"],
+          }
+        ~~~
+
+      react : 
+
+        ~~~js
+          {
+             "extends": "@ignite-ui/ts-config/react.json",
+             "include": ["src"],
+          }
+        ~~~
+
+## Configuração do ESLint
+
+
+
