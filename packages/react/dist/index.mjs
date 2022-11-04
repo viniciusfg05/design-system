@@ -1,9 +1,26 @@
 var __create = Object.create;
 var __defProp = Object.defineProperty;
+var __defProps = Object.defineProperties;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
 var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
 var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
+    }
+  return a;
+};
+var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
 var __commonJS = (cb, mod) => function __require() {
   return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
 };
@@ -43,16 +60,16 @@ var require_dist = __commonJS({
     var __toCommonJS = (mod) => __copyProps2(__defProp2({}, "__esModule", { value: true }), mod);
     var src_exports = {};
     __export(src_exports, {
-      colors: () => colors2,
-      fontSizes: () => fontSizes,
-      fontWeights: () => fontWeights,
-      fonts: () => fonts,
-      lineHeights: () => lineHeights,
-      radii: () => radii,
-      space: () => space
+      colors: () => colors3,
+      fontSizes: () => fontSizes2,
+      fontWeights: () => fontWeights2,
+      fonts: () => fonts2,
+      lineHeights: () => lineHeights2,
+      radii: () => radii2,
+      space: () => space2
     });
     module.exports = __toCommonJS(src_exports);
-    var colors2 = {
+    var colors3 = {
       white: "#FFF",
       black: "#000",
       gray100: "#E1E1E6",
@@ -68,7 +85,7 @@ var require_dist = __commonJS({
       ignite700: "#015F43",
       ignite900: "#00291D"
     };
-    var fontSizes = {
+    var fontSizes2 = {
       xxs: "0.625rem",
       xs: "0.75rem",
       sm: "0.875rem",
@@ -83,22 +100,22 @@ var require_dist = __commonJS({
       "8xl": "4.5rem",
       "9xl": "6rem"
     };
-    var fontWeights = {
+    var fontWeights2 = {
       regular: "400",
       medium: "500",
       bold: "700"
     };
-    var fonts = {
+    var fonts2 = {
       default: "Roboto, sans-serif",
       code: "monospace"
     };
-    var lineHeights = {
+    var lineHeights2 = {
       shorter: "125%",
       short: "140%",
       base: "160%",
       tall: "180%"
     };
-    var radii = {
+    var radii2 = {
       px: "1px",
       xs: "4px",
       sm: "6px",
@@ -106,7 +123,7 @@ var require_dist = __commonJS({
       lg: "16px",
       full: "99999px"
     };
-    var space = {
+    var space2 = {
       1: "0.25rem",
       2: "0.5rem",
       3: "0.75rem",
@@ -128,9 +145,43 @@ var require_dist = __commonJS({
 
 // src/index.tsx
 var import_tokens = __toESM(require_dist());
+
+// src/styles/index.ts
+var import_dist = __toESM(require_dist());
+import { createStitches, defaultThemeMap } from "@stitches/react";
+var {
+  styled,
+  css,
+  globalCss,
+  keyframes,
+  getCssText,
+  theme,
+  createTheme,
+  config
+} = createStitches({
+  themeMap: __spreadProps(__spreadValues({}, defaultThemeMap), {
+    height: "space",
+    width: "space"
+  }),
+  theme: {
+    colors: import_dist.colors,
+    fontSizes: import_dist.fontSizes,
+    fontWeights: import_dist.fontWeights,
+    fonts: import_dist.fonts,
+    lineHeights: import_dist.lineHeights,
+    radii: import_dist.radii,
+    space: import_dist.space
+  }
+});
+
+// src/index.tsx
 import { jsx } from "react/jsx-runtime";
+var H1Styled = styled("h1", {
+  fontFamily: "$default",
+  color: "$gray400"
+});
 function App() {
-  return /* @__PURE__ */ jsx("h1", {
+  return /* @__PURE__ */ jsx(H1Styled, {
     style: { color: import_tokens.colors.gray400 },
     children: "Hello World"
   });
