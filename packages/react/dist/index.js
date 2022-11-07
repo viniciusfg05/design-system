@@ -66,7 +66,7 @@ var require_dist = __commonJS({
     var __toCommonJS2 = (mod) => __copyProps2(__defProp2({}, "__esModule", { value: true }), mod);
     var src_exports2 = {};
     __export2(src_exports2, {
-      colors: () => colors3,
+      colors: () => colors2,
       fontSizes: () => fontSizes2,
       fontWeights: () => fontWeights2,
       fonts: () => fonts2,
@@ -75,7 +75,7 @@ var require_dist = __commonJS({
       space: () => space2
     });
     module2.exports = __toCommonJS2(src_exports2);
-    var colors3 = {
+    var colors2 = {
       white: "#FFF",
       black: "#000",
       gray100: "#E1E1E6",
@@ -152,10 +152,9 @@ var require_dist = __commonJS({
 // src/index.tsx
 var src_exports = {};
 __export(src_exports, {
-  App: () => App
+  Button: () => Button
 });
 module.exports = __toCommonJS(src_exports);
-var import_tokens = __toESM(require_dist());
 
 // src/styles/index.ts
 var import_dist = __toESM(require_dist());
@@ -186,18 +185,30 @@ var {
 });
 
 // src/index.tsx
-var import_jsx_runtime = require("react/jsx-runtime");
-var H1Styled = styled("h1", {
+var Button = styled("button", {
   fontFamily: "$default",
-  color: "$gray400"
+  backgroundColor: "$ignite300",
+  borderRadius: "$sm",
+  border: 0,
+  fontWeight: "bold",
+  color: "$white",
+  variants: {
+    size: {
+      small: {
+        fontSize: 14,
+        padding: "$2 $4"
+      },
+      big: {
+        fontSize: 16,
+        padding: "$3 $6"
+      }
+    }
+  },
+  defaultVariants: {
+    size: "small"
+  }
 });
-function App() {
-  return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(H1Styled, {
-    style: { color: import_tokens.colors.gray400 },
-    children: "Hello World"
-  });
-}
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
-  App
+  Button
 });
