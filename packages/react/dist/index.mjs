@@ -190,6 +190,34 @@ var Box = styled("div", {
   backgroundColor: "$gray800",
   border: "1px solid $gray600"
 });
+Box.displayName = "Box";
+
+// src/components/textArea.tsx
+var TextArea = styled("textarea", {
+  backgroundColor: "$gray900",
+  padding: "$3 $4",
+  borderRadius: "$sm",
+  boxSizing: "border-box",
+  border: "2px solid $gray900",
+  fontFamily: "$default",
+  fontSize: "$sm",
+  color: "$white",
+  fontWeight: "$regular",
+  resize: "vertical",
+  minHeight: 80,
+  "&:focus": {
+    outline: 0,
+    borderColor: "$ignite300"
+  },
+  "&:disabled": {
+    opacity: 0.5,
+    cursor: "not-allowed"
+  },
+  "&:placeholder": {
+    color: "$gray400"
+  }
+});
+TextArea.displayName = "TextArea";
 
 // src/components/text.tsx
 var Text = styled("p", {
@@ -218,6 +246,7 @@ var Text = styled("p", {
     size: "md"
   }
 });
+Text.displayName = "Text";
 
 // src/components/heading.tsx
 var Heading = styled("h2", {
@@ -241,6 +270,7 @@ var Heading = styled("h2", {
     size: "md"
   }
 });
+Heading.displayName = "Heading";
 
 // src/components/button.tsx
 var Button = styled("button", {
@@ -314,6 +344,7 @@ var Button = styled("button", {
     size: "md"
   }
 });
+Button.displayName = "Button";
 
 // src/components/Avatar/index.tsx
 import { User } from "phosphor-react";
@@ -346,6 +377,7 @@ var AvatarFallbackStyled = styled(Avatar.Fallback, {
     height: "$6"
   }
 });
+AvatarImageStyled.displayName = "Avatar";
 
 // src/components/Avatar/index.tsx
 import { jsx, jsxs } from "react/jsx-runtime";
@@ -402,6 +434,7 @@ var Input = styled("input", {
     color: "$gray400"
   }
 });
+TextInputContainer.displayName = "Input";
 
 // src/components/TextInput/index.tsx
 import { jsx as jsx2, jsxs as jsxs2 } from "react/jsx-runtime";
@@ -471,6 +504,7 @@ var CheckboxIndicatorStyled = styled(Checkbox.Indicator, {
     animation: `${slideOut} 200ms ease-out`
   }
 });
+CheckboxContainerStyled.displayName = "Checkbox";
 
 // src/components/Checkbox/index.tsx
 import { jsx as jsx3 } from "react/jsx-runtime";
@@ -538,6 +572,7 @@ function MultStep({ size, currentStep = 1 }) {
     ]
   });
 }
+MultStep.displayName = "MultStep";
 export {
   Avatar2 as Avatar,
   Box,
@@ -546,5 +581,6 @@ export {
   Heading,
   MultStep,
   Text,
+  TextArea,
   TextInput
 };
