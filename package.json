@@ -6,5 +6,8 @@
   "scripts": {
     "dev": "turbo run dev --parallel",
     "build": "turbo run build"
+  },
+  "devDependencies": {
+    "@storybook/storybook-deployer": "^2.8.16"
   }
 }
