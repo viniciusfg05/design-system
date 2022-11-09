@@ -1,13 +1,22 @@
 {
-  "private": true,
   "workspaces": [
     "packages/*"
   ],
   "scripts": {
     "dev": "turbo run dev --parallel",
-    "build": "turbo run build"
+    "build": "turbo run build",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "turbo run build --ignore=!packages/docks && changeset publish"
+  },
+  "publishConfig": {
+    "@bytap/registry": "https://registry.npmjs.org/"
   },
   "devDependencies": {
     "@storybook/storybook-deployer": "^2.8.16"
+  },
+  "dependencies": {
+    "@changesets/cli": "^2.25.2",
+    "registry-url": "^6.0.1"
   }
 }
