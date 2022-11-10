@@ -1,5 +1,5 @@
 {
-  "name": "@ignite-ui/docks",
+  "name": "@foreverdark/docks",
   "version": "1.0.0",
   "description": "storybook",
   "private": true,
@@ -29,10 +29,10 @@
     "vite": "^3.2.2"
   },
   "dependencies": {
-    "@ignite-ui/eslint-config": "*",
-    "@ignite-ui/react": "*",
-    "@ignite-ui/tokens": "*",
-    "@ignite-ui/ts-config": "*",
+    "@foreverdark/eslint-config": "*",
+    "@foreverdark/react": "*",
+    "@foreverdark/tokens": "*",
+    "@foreverdark/ts-config": "*",
     "@storybook/addon-a11y": "^6.5.13",
     "polished": "^4.2.2",
     "react": "^18.2.0",
