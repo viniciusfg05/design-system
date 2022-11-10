@@ -1,4 +1,4 @@
-import { colors } from '@ignite-ui/tokens'
+import { colors } from '@foreverdark/tokens'
 import { getContrast } from 'polished' // Calculo de constrate das cores
 
 export function ColorsGrid() {

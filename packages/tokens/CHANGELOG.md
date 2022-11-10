@@ -1,4 +1,4 @@
-# @ignite-ui/tokens
+# @foreverdark/tokens
 
 ## 2.1.0
 

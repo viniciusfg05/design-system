@@ -1,4 +1,4 @@
-# @ignite-ui/react
+# @foreverdark/react
 
 ## 2.1.0
 
