@@ -22,20 +22,12 @@ jobs:
       - run: npm run build
         env:
           TURBO_TOKEN: RrD7s963k6iYXV1Qa2LjmuUH
-          TURBO_TEAM: viniciusfg05gity
+          TURBO_TEAM: viniciusfg05
 
       - name: Deploy storybook
         working-directory: ./packages/docks
         run: npm run deploy-storybook -- --ci --existing-output-dir=storybook-static
         env:
           GH_TOKEN: ${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}
-
-      - name: Creating .npmrc
-        run: |
-          cat << EOF > "$HOME/.npmrc"
-            //registry.npmjs.org/:_authToken=$NPM_TOKEN
-          EOF
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }} 
 
           
