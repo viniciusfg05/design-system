@@ -576,48 +576,119 @@ function MultStep({ size, currentStep = 1 }) {
 MultStep.displayName = "MultStep";
 
 // src/components/Toast/index.tsx
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 // src/components/Toast/styles.ts
 import * as Toast from "@radix-ui/react-toast";
+import { keyframes as keyframes3 } from "@stitches/react";
 var ToastContainerStyled = styled(Toast.Provider, {});
+var slideIn2 = keyframes3({
+  from: {
+    transform: "translateX(110%)"
+  },
+  to: {
+    transform: "translateX(0%)"
+  }
+});
+var slideOut2 = keyframes3({
+  from: {
+    transform: "translateX(-0%)"
+  },
+  to: {
+    transform: "translateX(110%)"
+  }
+});
 var ToastContentStyled = styled(Toast.Root, {
   width: "22.5rem",
   height: "100%",
-  backgroundColor: "$white",
+  backgroundColor: "$gray600",
   borderRadius: "$md",
-  padding: "$4"
+  padding: "$4",
+  '&[data-state="open"]': {
+    animation: `${slideIn2} 200ms ease-out`
+  },
+  '&[data-state="closed"]': {
+    animation: `${slideOut2} 200ms ease-out`
+  }
+});
+var ToastTitleStyled = styled(Toast.Title, {
+  fontSize: "$xl",
+  fontWeight: "$bold",
+  color: "$white",
+  marginBottom: "$1",
+  fontFamily: "Roboto"
+});
+var ToastActionStyled = styled(Toast.Action, {
+  display: "flex",
+  alignitems: "center",
+  justifyContent: "center",
+  position: "absolute",
+  width: "$5",
+  height: "$5",
+  background: "transparent",
+  border: 0,
+  lineHeight: 0,
+  top: "1.5rem",
+  right: "1.5rem"
 });
 var HeaderContentStyled = styled("div", {
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center"
 });
+var DescriptionStyled = styled(Toast.Description, {
+  margin: 0,
+  color: "$gray200",
+  fontFamily: "Roboto",
+  fontSize: "$sm",
+  lineHeight: "$tall"
+});
+var DescriptionDateStyled = styled("div", {
+  display: "flex",
+  alignItems: "center",
+  p: {
+    textTransform: "capitalize",
+    margin: 0
+  },
+  span: {
+    marginLeft: "$1",
+    marginRight: "$1"
+  },
+  strong: {
+    fontWeight: "normal",
+    marginRight: "$1"
+  }
+});
+var DescriptionStringStyled = styled("p", {});
 var ViewportStyled = styled(Toast.Viewport, {
+  "--viewport-padding": "$4",
   position: "fixed",
   bottom: 0,
   right: 0,
   display: "flex",
   flexDirection: "column",
+  gap: 10,
   width: "390px",
   maxWidth: "100vw",
   margin: 0,
   listStyle: "none",
   zIndex: 2147483647,
-  outline: "none"
+  outline: "none",
+  padding: "$4"
 });
 
 // src/components/Toast/index.tsx
-import * as Toasts from "@radix-ui/react-toast";
 import { X } from "phosphor-react";
+import { format } from "date-fns";
+import { ptBR } from "date-fns/locale";
 import { jsx as jsx5, jsxs as jsxs4 } from "react/jsx-runtime";
+var formattedDate = format(new Date(), "dd MMM aaaa", {
+  locale: ptBR
+});
 function Toast2(_a) {
-  var _b = _a, { interval } = _b, props = __objRest(_b, ["interval"]);
+  var _b = _a, { description, interval, IsDate } = _b, props = __objRest(_b, ["description", "interval", "IsDate"]);
   const [open, setOpen] = useState(false);
-  const eventDateRef = useRef(new Date());
-  function prettyDate(date) {
-    return new Intl.DateTimeFormat("en-US", { dateStyle: "full", timeStyle: "short" }).format(date);
-  }
+  const date = new Date();
   return /* @__PURE__ */ jsxs4(ToastContainerStyled, __spreadProps(__spreadValues({
     swipeDirection: "right"
   }, props), {
@@ -629,28 +700,57 @@ function Toast2(_a) {
             setOpen(false);
           }, interval);
         },
-        children: "CLick"
+        children: "Add to Calendar"
       }),
       /* @__PURE__ */ jsxs4(ToastContentStyled, {
         open,
         children: [
           /* @__PURE__ */ jsxs4(HeaderContentStyled, {
             children: [
-              /* @__PURE__ */ jsx5(Toasts.Title, {
+              /* @__PURE__ */ jsx5(ToastTitleStyled, {
                 children: "Agendamento realizado"
               }),
-              /* @__PURE__ */ jsx5(Toasts.Action, {
+              /* @__PURE__ */ jsx5(ToastActionStyled, {
                 asChild: true,
                 altText: "Goto schedule to undo",
                 onClick: () => setOpen(false),
                 children: /* @__PURE__ */ jsx5(X, {
-                  size: 11
+                  size: 12
                 })
               })
             ]
           }),
-          /* @__PURE__ */ jsx5(Toasts.Description, {
-            children: prettyDate(eventDateRef.current)
+          /* @__PURE__ */ jsx5(DescriptionStyled, {
+            children: !IsDate ? /* @__PURE__ */ jsx5(Text, {
+              children: description
+            }) : /* @__PURE__ */ jsxs4(DescriptionDateStyled, {
+              children: [
+                /* @__PURE__ */ jsx5("p", {
+                  children: format(date, "eee", { locale: ptBR })
+                }),
+                /* @__PURE__ */ jsx5("strong", {
+                  children: ","
+                }),
+                /* @__PURE__ */ jsx5("p", {
+                  children: format(date, "dd", { locale: ptBR })
+                }),
+                /* @__PURE__ */ jsx5("span", {
+                  children: "de"
+                }),
+                /* @__PURE__ */ jsx5("p", {
+                  children: format(date, "MMMM", { locale: ptBR })
+                }),
+                /* @__PURE__ */ jsx5("span", {
+                  children: "\xE0s"
+                }),
+                /* @__PURE__ */ jsxs4("p", {
+                  children: [
+                    format(date, "k", { locale: ptBR }),
+                    "h"
+                  ]
+                })
+              ]
+            })
           })
         ]
       }),
@@ -668,5 +768,6 @@ export {
   Text,
   TextArea,
   TextInput,
-  Toast2 as Toast
+  Toast2 as Toast,
+  formattedDate
 };

@@ -10,6 +10,7 @@ declare const Box: _stitches_react_types_styled_component.StyledComponent<"div",
     colors: {
         white: string;
         black: string;
+        test: string;
         gray100: string;
         gray200: string;
         gray400: string;
@@ -216,6 +217,7 @@ declare const TextArea: _stitches_react_types_styled_component.StyledComponent<"
     colors: {
         white: string;
         black: string;
+        test: string;
         gray100: string;
         gray200: string;
         gray400: string;
@@ -423,6 +425,7 @@ declare const Text: _stitches_react_types_styled_component.StyledComponent<"p", 
     colors: {
         white: string;
         black: string;
+        test: string;
         gray100: string;
         gray200: string;
         gray400: string;
@@ -631,6 +634,7 @@ declare const Heading: _stitches_react_types_styled_component.StyledComponent<"h
     colors: {
         white: string;
         black: string;
+        test: string;
         gray100: string;
         gray200: string;
         gray400: string;
@@ -840,6 +844,7 @@ declare const Button: _stitches_react_types_styled_component.StyledComponent<"bu
     colors: {
         white: string;
         black: string;
+        test: string;
         gray100: string;
         gray200: string;
         gray400: string;
@@ -1046,6 +1051,7 @@ declare const AvatarImageStyled: _stitches_react_types_styled_component.StyledCo
     colors: {
         white: string;
         black: string;
+        test: string;
         gray100: string;
         gray200: string;
         gray400: string;
@@ -1253,6 +1259,7 @@ declare const Input: _stitches_react_types_styled_component.StyledComponent<"inp
     colors: {
         white: string;
         black: string;
+        test: string;
         gray100: string;
         gray200: string;
         gray400: string;
@@ -1461,6 +1468,7 @@ declare const CheckboxContainerStyled: _stitches_react_types_styled_component.St
     colors: {
         white: string;
         black: string;
+        test: string;
         gray100: string;
         gray200: string;
         gray400: string;
@@ -1879,7 +1887,11 @@ declare const ToastContainerStyled: _stitches_react_types_styled_component.Style
 
 interface ToastProps extends ComponentProps<typeof ToastContainerStyled> {
     interval?: number;
+    IsDate?: Boolean;
+    string: string;
+    description?: string;
 }
-declare function Toast({ interval, ...props }: ToastProps): JSX.Element;
+declare const formattedDate: string;
+declare function Toast({ description, interval, IsDate, ...props }: ToastProps): JSX.Element;
 
-export { Avatar, AvatarProps, Box, BoxProps, Button, ButtonProps, Checkbox, CheckboxProps, Heading, HeadingProps, MultStep, MultStepProps, Text, TextArea, TextAreaProps, TextInput, TextInputProps, TextProps, Toast, ToastProps };
+export { Avatar, AvatarProps, Box, BoxProps, Button, ButtonProps, Checkbox, CheckboxProps, Heading, HeadingProps, MultStep, MultStepProps, Text, TextArea, TextAreaProps, TextInput, TextInputProps, TextProps, Toast, ToastProps, formattedDate };

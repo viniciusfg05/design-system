@@ -174,7 +174,8 @@ __export(src_exports, {
   Text: () => Text,
   TextArea: () => TextArea,
   TextInput: () => TextInput,
-  Toast: () => Toast2
+  Toast: () => Toast2,
+  formattedDate: () => formattedDate
 });
 module.exports = __toCommonJS(src_exports);
 
@@ -598,48 +599,119 @@ function MultStep({ size, currentStep = 1 }) {
 MultStep.displayName = "MultStep";
 
 // src/components/Toast/index.tsx
-var import_react3 = require("react");
+var import_react4 = require("react");
 
 // src/components/Toast/styles.ts
 var Toast = __toESM(require("@radix-ui/react-toast"));
+var import_react3 = require("@stitches/react");
 var ToastContainerStyled = styled(Toast.Provider, {});
+var slideIn2 = (0, import_react3.keyframes)({
+  from: {
+    transform: "translateX(110%)"
+  },
+  to: {
+    transform: "translateX(0%)"
+  }
+});
+var slideOut2 = (0, import_react3.keyframes)({
+  from: {
+    transform: "translateX(-0%)"
+  },
+  to: {
+    transform: "translateX(110%)"
+  }
+});
 var ToastContentStyled = styled(Toast.Root, {
   width: "22.5rem",
   height: "100%",
-  backgroundColor: "$white",
+  backgroundColor: "$gray600",
   borderRadius: "$md",
-  padding: "$4"
+  padding: "$4",
+  '&[data-state="open"]': {
+    animation: `${slideIn2} 200ms ease-out`
+  },
+  '&[data-state="closed"]': {
+    animation: `${slideOut2} 200ms ease-out`
+  }
+});
+var ToastTitleStyled = styled(Toast.Title, {
+  fontSize: "$xl",
+  fontWeight: "$bold",
+  color: "$white",
+  marginBottom: "$1",
+  fontFamily: "Roboto"
+});
+var ToastActionStyled = styled(Toast.Action, {
+  display: "flex",
+  alignitems: "center",
+  justifyContent: "center",
+  position: "absolute",
+  width: "$5",
+  height: "$5",
+  background: "transparent",
+  border: 0,
+  lineHeight: 0,
+  top: "1.5rem",
+  right: "1.5rem"
 });
 var HeaderContentStyled = styled("div", {
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center"
 });
+var DescriptionStyled = styled(Toast.Description, {
+  margin: 0,
+  color: "$gray200",
+  fontFamily: "Roboto",
+  fontSize: "$sm",
+  lineHeight: "$tall"
+});
+var DescriptionDateStyled = styled("div", {
+  display: "flex",
+  alignItems: "center",
+  p: {
+    textTransform: "capitalize",
+    margin: 0
+  },
+  span: {
+    marginLeft: "$1",
+    marginRight: "$1"
+  },
+  strong: {
+    fontWeight: "normal",
+    marginRight: "$1"
+  }
+});
+var DescriptionStringStyled = styled("p", {});
 var ViewportStyled = styled(Toast.Viewport, {
+  "--viewport-padding": "$4",
   position: "fixed",
   bottom: 0,
   right: 0,
   display: "flex",
   flexDirection: "column",
+  gap: 10,
   width: "390px",
   maxWidth: "100vw",
   margin: 0,
   listStyle: "none",
   zIndex: 2147483647,
-  outline: "none"
+  outline: "none",
+  padding: "$4"
 });
 
 // src/components/Toast/index.tsx
-var Toasts = __toESM(require("@radix-ui/react-toast"));
 var import_phosphor_react3 = require("phosphor-react");
+var import_date_fns = require("date-fns");
+var import_locale = require("date-fns/locale");
 var import_jsx_runtime5 = require("react/jsx-runtime");
+var formattedDate = (0, import_date_fns.format)(new Date(), "dd MMM aaaa", {
+  locale: import_locale.ptBR
+});
 function Toast2(_a) {
-  var _b = _a, { interval } = _b, props = __objRest(_b, ["interval"]);
-  const [open, setOpen] = (0, import_react3.useState)(false);
-  const eventDateRef = (0, import_react3.useRef)(new Date());
-  function prettyDate(date) {
-    return new Intl.DateTimeFormat("en-US", { dateStyle: "full", timeStyle: "short" }).format(date);
-  }
+  var _b = _a, { description, interval, IsDate } = _b, props = __objRest(_b, ["description", "interval", "IsDate"]);
+  const [open, setOpen] = (0, import_react4.useState)(false);
+  const date = new Date();
   return /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(ToastContainerStyled, __spreadProps(__spreadValues({
     swipeDirection: "right"
   }, props), {
@@ -651,28 +723,57 @@ function Toast2(_a) {
             setOpen(false);
           }, interval);
         },
-        children: "CLick"
+        children: "Add to Calendar"
       }),
       /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(ToastContentStyled, {
         open,
         children: [
           /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(HeaderContentStyled, {
             children: [
-              /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(Toasts.Title, {
+              /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(ToastTitleStyled, {
                 children: "Agendamento realizado"
               }),
-              /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(Toasts.Action, {
+              /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(ToastActionStyled, {
                 asChild: true,
                 altText: "Goto schedule to undo",
                 onClick: () => setOpen(false),
                 children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(import_phosphor_react3.X, {
-                  size: 11
+                  size: 12
                 })
               })
             ]
           }),
-          /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(Toasts.Description, {
-            children: prettyDate(eventDateRef.current)
+          /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(DescriptionStyled, {
+            children: !IsDate ? /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(Text, {
+              children: description
+            }) : /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(DescriptionDateStyled, {
+              children: [
+                /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("p", {
+                  children: (0, import_date_fns.format)(date, "eee", { locale: import_locale.ptBR })
+                }),
+                /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("strong", {
+                  children: ","
+                }),
+                /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("p", {
+                  children: (0, import_date_fns.format)(date, "dd", { locale: import_locale.ptBR })
+                }),
+                /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", {
+                  children: "de"
+                }),
+                /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("p", {
+                  children: (0, import_date_fns.format)(date, "MMMM", { locale: import_locale.ptBR })
+                }),
+                /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", {
+                  children: "\xE0s"
+                }),
+                /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("p", {
+                  children: [
+                    (0, import_date_fns.format)(date, "k", { locale: import_locale.ptBR }),
+                    "h"
+                  ]
+                })
+              ]
+            })
           })
         ]
       }),
@@ -691,5 +792,6 @@ function Toast2(_a) {
   Text,
   TextArea,
   TextInput,
-  Toast
+  Toast,
+  formattedDate
 });
