@@ -26,7 +26,7 @@ export default {
       control: 'boolean'
     },
     onClick: {
-      action: 'click',
+      action: 'clicks',
     },
   }
 } as Meta<ButtonProps>

@@ -84,6 +84,7 @@ var require_dist = __commonJS({
     var colors2 = {
       white: "#FFF",
       black: "#000",
+      test: "#fff",
       gray100: "#E1E1E6",
       gray200: "#A9A9B2",
       gray400: "#7C7C8A",
@@ -573,6 +574,90 @@ function MultStep({ size, currentStep = 1 }) {
   });
 }
 MultStep.displayName = "MultStep";
+
+// src/components/Toast/index.tsx
+import { useRef, useState } from "react";
+
+// src/components/Toast/styles.ts
+import * as Toast from "@radix-ui/react-toast";
+var ToastContainerStyled = styled(Toast.Provider, {});
+var ToastContentStyled = styled(Toast.Root, {
+  width: "22.5rem",
+  height: "100%",
+  backgroundColor: "$white",
+  borderRadius: "$md",
+  padding: "$4"
+});
+var HeaderContentStyled = styled("div", {
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center"
+});
+var ViewportStyled = styled(Toast.Viewport, {
+  position: "fixed",
+  bottom: 0,
+  right: 0,
+  display: "flex",
+  flexDirection: "column",
+  width: "390px",
+  maxWidth: "100vw",
+  margin: 0,
+  listStyle: "none",
+  zIndex: 2147483647,
+  outline: "none"
+});
+
+// src/components/Toast/index.tsx
+import * as Toasts from "@radix-ui/react-toast";
+import { X } from "phosphor-react";
+import { jsx as jsx5, jsxs as jsxs4 } from "react/jsx-runtime";
+function Toast2(_a) {
+  var _b = _a, { interval } = _b, props = __objRest(_b, ["interval"]);
+  const [open, setOpen] = useState(false);
+  const eventDateRef = useRef(new Date());
+  function prettyDate(date) {
+    return new Intl.DateTimeFormat("en-US", { dateStyle: "full", timeStyle: "short" }).format(date);
+  }
+  return /* @__PURE__ */ jsxs4(ToastContainerStyled, __spreadProps(__spreadValues({
+    swipeDirection: "right"
+  }, props), {
+    children: [
+      /* @__PURE__ */ jsx5(Button, {
+        onClick: () => {
+          setOpen(true);
+          setTimeout(() => {
+            setOpen(false);
+          }, interval);
+        },
+        children: "CLick"
+      }),
+      /* @__PURE__ */ jsxs4(ToastContentStyled, {
+        open,
+        children: [
+          /* @__PURE__ */ jsxs4(HeaderContentStyled, {
+            children: [
+              /* @__PURE__ */ jsx5(Toasts.Title, {
+                children: "Agendamento realizado"
+              }),
+              /* @__PURE__ */ jsx5(Toasts.Action, {
+                asChild: true,
+                altText: "Goto schedule to undo",
+                onClick: () => setOpen(false),
+                children: /* @__PURE__ */ jsx5(X, {
+                  size: 11
+                })
+              })
+            ]
+          }),
+          /* @__PURE__ */ jsx5(Toasts.Description, {
+            children: prettyDate(eventDateRef.current)
+          })
+        ]
+      }),
+      /* @__PURE__ */ jsx5(ViewportStyled, {})
+    ]
+  }));
+}
 export {
   Avatar2 as Avatar,
   Box,
@@ -582,5 +667,6 @@ export {
   MultStep,
   Text,
   TextArea,
-  TextInput
+  TextInput,
+  Toast2 as Toast
 };
