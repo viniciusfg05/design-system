@@ -1,0 +1,2 @@
+import{d as t}from"./index.c5ca2587.js";import"./index.01d3334c.js";import"./iframe.c112d373.js";import"./index.5fd4a078.js";import"./jsx-runtime.7828434c.js";const i={title:"Form/Toast",component:t,args:{interval:3e3,IsDate:!0},argTypes:{interval:{control:"number"},IsDate:{control:"boolean"},description:{control:"text"}}},n={args:{description:"Lorem ipsum dolor sit amet, consectetur adip"}},m=["Primary"];export{n as Primary,m as __namedExportsOrder,i as default};
+//# sourceMappingURL=Toast.stories.ebcbc6a4.js.map
