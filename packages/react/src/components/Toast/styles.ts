@@ -39,9 +39,9 @@ export const ToastContentStyled = styled(Toast.Root , {
         animation: `${slideIn} 200ms ease-out`,
       },
     
-      '&[data-state="closed"]': {
-        animation: `${slideOut} 200ms ease-out`,
-      },
+    '&[data-state="closed"]': {
+      animation: `${slideOut} 200ms ease-out`,
+    },
 })
 
 export const ToastTitleStyled = styled(Toast.Title , {

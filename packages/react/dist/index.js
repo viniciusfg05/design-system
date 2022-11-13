@@ -175,6 +175,7 @@ __export(src_exports, {
   TextArea: () => TextArea,
   TextInput: () => TextInput,
   Toast: () => Toast2,
+  Tooltip: () => Tooltip,
   formattedDate: () => formattedDate
 });
 module.exports = __toCommonJS(src_exports);
@@ -781,6 +782,99 @@ function Toast2(_a) {
     ]
   }));
 }
+
+// src/components/Tooltip/styles.ts
+var Toast3 = __toESM(require("@radix-ui/react-tooltip"));
+var import_react5 = require("@stitches/react");
+var ToolTipContainerStyled = styled(Toast3.Provider, {});
+var ToolTipRootStyled = styled(Toast3.Root, {});
+var ToolTipTriggerStyled = styled(Toast3.Trigger, {});
+var ToolTipPortalStyled = styled(Toast3.Portal, {});
+var ToolTipArrowStyled = styled(Toast3.Arrow, {
+  fill: "$gray900",
+  width: "1rem",
+  height: "0.5rem"
+});
+var transformSlide = (0, import_react5.keyframes)({
+  from: {
+    transform: "translateY(-100%)"
+  },
+  to: {
+    transform: "translateY(0)"
+  }
+});
+var slideIn3 = (0, import_react5.keyframes)({
+  from: {
+    transform: "scale(0)",
+    height: "0",
+    opacity: "0"
+  },
+  to: {
+    transform: "scale(1)",
+    height: "2.75",
+    opacity: "1"
+  }
+});
+var slideOut3 = (0, import_react5.keyframes)({
+  to: {
+    transform: "scale(0)",
+    height: "0",
+    opacity: "0"
+  },
+  from: {
+    transform: "scale(1)",
+    height: "2.75",
+    opacity: "1"
+  }
+});
+var ToolTipContentStyled = styled(Toast3.Content, {
+  backgroundColor: "$gray900",
+  color: "$gray100",
+  padding: "$3",
+  borderRadius: "$md",
+  width: "13.125rem",
+  height: "2.75",
+  fontFamily: "Inter, roboto",
+  fontSizes: "$sm",
+  alignItems: "center",
+  textAlign: "center",
+  border: "none",
+  '&[data-state="delayed-open"]': {
+    animation: `${slideIn3} 200ms ease-out `
+  },
+  '&[data-state="closed"]': {
+    animation: `${slideOut3} 200ms ease-out`
+  }
+});
+
+// src/components/Tooltip/index.tsx
+var import_jsx_runtime6 = require("react/jsx-runtime");
+function Tooltip(_a) {
+  var _b = _a, { content } = _b, props = __objRest(_b, ["content"]);
+  return /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(ToolTipContainerStyled, __spreadProps(__spreadValues({}, props), {
+    children: /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(ToolTipRootStyled, {
+      delayDuration: 200,
+      children: [
+        /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(ToolTipTriggerStyled, {
+          asChild: true,
+          children: /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Button, {
+            children: props.children
+          })
+        }),
+        /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(ToolTipPortalStyled, {
+          children: /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(ToolTipContentStyled, {
+            sideOffset: 5,
+            "data-align": "center",
+            children: [
+              content,
+              /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(ToolTipArrowStyled, {})
+            ]
+          })
+        })
+      ]
+    })
+  }));
+}
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   Avatar,
@@ -793,5 +887,6 @@ function Toast2(_a) {
   TextArea,
   TextInput,
   Toast,
+  Tooltip,
   formattedDate
 });

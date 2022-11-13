@@ -758,6 +758,99 @@ function Toast2(_a) {
     ]
   }));
 }
+
+// src/components/Tooltip/styles.ts
+import * as Toast3 from "@radix-ui/react-tooltip";
+import { keyframes as keyframes4 } from "@stitches/react";
+var ToolTipContainerStyled = styled(Toast3.Provider, {});
+var ToolTipRootStyled = styled(Toast3.Root, {});
+var ToolTipTriggerStyled = styled(Toast3.Trigger, {});
+var ToolTipPortalStyled = styled(Toast3.Portal, {});
+var ToolTipArrowStyled = styled(Toast3.Arrow, {
+  fill: "$gray900",
+  width: "1rem",
+  height: "0.5rem"
+});
+var transformSlide = keyframes4({
+  from: {
+    transform: "translateY(-100%)"
+  },
+  to: {
+    transform: "translateY(0)"
+  }
+});
+var slideIn3 = keyframes4({
+  from: {
+    transform: "scale(0)",
+    height: "0",
+    opacity: "0"
+  },
+  to: {
+    transform: "scale(1)",
+    height: "2.75",
+    opacity: "1"
+  }
+});
+var slideOut3 = keyframes4({
+  to: {
+    transform: "scale(0)",
+    height: "0",
+    opacity: "0"
+  },
+  from: {
+    transform: "scale(1)",
+    height: "2.75",
+    opacity: "1"
+  }
+});
+var ToolTipContentStyled = styled(Toast3.Content, {
+  backgroundColor: "$gray900",
+  color: "$gray100",
+  padding: "$3",
+  borderRadius: "$md",
+  width: "13.125rem",
+  height: "2.75",
+  fontFamily: "Inter, roboto",
+  fontSizes: "$sm",
+  alignItems: "center",
+  textAlign: "center",
+  border: "none",
+  '&[data-state="delayed-open"]': {
+    animation: `${slideIn3} 200ms ease-out `
+  },
+  '&[data-state="closed"]': {
+    animation: `${slideOut3} 200ms ease-out`
+  }
+});
+
+// src/components/Tooltip/index.tsx
+import { jsx as jsx6, jsxs as jsxs5 } from "react/jsx-runtime";
+function Tooltip(_a) {
+  var _b = _a, { content } = _b, props = __objRest(_b, ["content"]);
+  return /* @__PURE__ */ jsx6(ToolTipContainerStyled, __spreadProps(__spreadValues({}, props), {
+    children: /* @__PURE__ */ jsxs5(ToolTipRootStyled, {
+      delayDuration: 200,
+      children: [
+        /* @__PURE__ */ jsx6(ToolTipTriggerStyled, {
+          asChild: true,
+          children: /* @__PURE__ */ jsx6(Button, {
+            children: props.children
+          })
+        }),
+        /* @__PURE__ */ jsx6(ToolTipPortalStyled, {
+          children: /* @__PURE__ */ jsxs5(ToolTipContentStyled, {
+            sideOffset: 5,
+            "data-align": "center",
+            children: [
+              content,
+              /* @__PURE__ */ jsx6(ToolTipArrowStyled, {})
+            ]
+          })
+        })
+      ]
+    })
+  }));
+}
 export {
   Avatar2 as Avatar,
   Box,
@@ -769,5 +862,6 @@ export {
   TextArea,
   TextInput,
   Toast2 as Toast,
+  Tooltip,
   formattedDate
 };
